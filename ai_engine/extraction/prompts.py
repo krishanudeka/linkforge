@@ -66,7 +66,7 @@ Rules
 6. "provenance_snippet" is ONE sentence copied verbatim from the passage that supports the triplet.
 7. Direction matters: subject acts on / contains / produces the object.
 8. Return at most 12 triplets. If nothing qualifies, return an empty list.
-
+9. NEVER invent a relation outside the allowed relation list. If the text uses wording such as "contributes to", "ameliorates", or another unsupported relation, map it to the closest allowed relation; when uncertain, use ASSOCIATED_WITH.\n10. Return STRICTLY VALID JSON. Escape any double quotes inside provenance_snippet or other string values as JSON requires. Do not output raw/unescaped quotation marks inside a JSON string.\n
 Output format: a single JSON object, nothing else:
 {{"analysis": "<one short sentence on the key findings>", "triplets": [
   {{"subject": "...", "subject_type": "...", "relation": "...", "object": "...", "object_type": "...",
@@ -112,11 +112,11 @@ FEW_SHOT = [
 
 def build_messages(chunk: str, title: str | None = None):
     header = f"Paper title: {title}\n\n" if title else ""
-    return (
-        [{"role": "system", "content": SYSTEM_PROMPT}]
-        + FEW_SHOT
-        + [{"role": "user", "content": f"{header}Passage:\n{chunk}"}]
-    )
+    return [
+        {"role": "system", "content": SYSTEM_PROMPT},
+        {"role": "user", "content": f"{header}Passage:\n{chunk}"},
+    ]
+
 
 
 RAG_SYSTEM_PROMPT = """You are LinkForge, a scientific literature assistant that answers ONLY from the

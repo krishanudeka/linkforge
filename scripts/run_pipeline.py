@@ -27,7 +27,7 @@ def main(argv=None):
 
     pipe = IngestionPipeline(get_services())
     for q in args.query or []:
-        res = pipe.ingest_query(q, args.source, args.limit, download=not args.no_download, progress=print)
+        res = pipe.ingest_query(q, args.source, args.limit, download=not args.no_download, force=args.force, progress=print)
         print(json.dumps({k: res[k] for k in ("query", "papers", "by_status", "triplets")}, indent=2))
     if args.pdf_dir:
         for pdf in sorted(Path(args.pdf_dir).glob("*.pdf")):

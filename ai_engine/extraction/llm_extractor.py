@@ -78,7 +78,6 @@ class LLMClient:
             kwargs["max_completion_tokens"] = max_tokens
             kwargs["reasoning_effort"] = "low"
             kwargs["include_reasoning"] = False
-            kwargs["response_format"] = {"type": "json_object"}
         else:
             kwargs["max_tokens"] = max_tokens
         resp = self._groq_client().chat.completions.create(**kwargs)

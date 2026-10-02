@@ -138,7 +138,8 @@ class GraphRAG:
             steps = []
             for e in p["edges"]:
                 ev = _edge_view(e)
-                ev["evidence"] = self.s.vectors.get_edge_provenance(e["source"], e["target"], limit=2)
+                ev["evidence"] = self.s.vectors.get_edge_provenance(
+                    e["source"], e["target"], limit=2, relation=e["type"], paper_ids=e["papers"])
                 steps.append(ev)
                 links[(e["source"], e["target"], e["type"])] = _edge_view(e)
             for n in p["nodes"]:

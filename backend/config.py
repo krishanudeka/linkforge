@@ -31,7 +31,7 @@ class Settings(BaseSettings):
     groq_model: str = "llama-3.1-8b-instant"
     ollama_host: str = "http://localhost:11434"
     ollama_model: str = "qwen2.5:7b"
-    llm_min_interval_sec: float = 2.5
+    llm_min_interval_sec: float = 10.0
     llm_max_retries: int = 5
     llm_timeout_sec: float = 120.0
 

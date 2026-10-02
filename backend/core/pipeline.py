@@ -100,7 +100,7 @@ class IngestionPipeline:
 
     # ------------------------------------------------------------------ batches
     def ingest_query(self, query: str, source: str = "europe_pmc", limit: int = 10,
-                     download: bool = True, progress: Optional[Callable[[str], None]] = None
+                     download: bool = True, force: bool = False, progress: Optional[Callable[[str], None]] = None
                      ) -> Dict[str, Any]:
         scraper = get_scraper(source)
         records = scraper.search(query, limit)
@@ -109,7 +109,7 @@ class IngestionPipeline:
             if download:
                 scraper.download_pdf(rec)
             try:
-                results.append(self.process_paper(rec.to_dict(), progress=progress))
+                results.append(self.process_paper(rec.to_dict(), force=force, progress=progress))
             except Exception as exc:  # noqa: BLE001
                 logger.exception("Paper %s failed", rec.paper_id)
                 results.append({"paper_id": rec.paper_id, "status": "error", "error": str(exc)})

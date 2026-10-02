@@ -151,8 +151,13 @@ class FakeVectors:
     def search_provenance(self, q, limit=4):
         return self._rank(self.prov, q, limit)
 
-    def get_edge_provenance(self, a, b, limit=5):
-        return [r for r in self.prov if {r["metadata"]["subject"], r["metadata"]["object"]} == {a, b}][:limit]
+    def get_edge_provenance(self, a, b, limit=5, relation=None, paper_ids=None):
+        rows = [r for r in self.prov if {r["metadata"]["subject"], r["metadata"]["object"]} == {a, b}]
+        if relation:
+            rows = [r for r in rows if r["metadata"]["relation"] == relation]
+        if paper_ids:
+            rows = [r for r in rows if r["metadata"]["paper_id"] in set(paper_ids)]
+        return rows[:limit]
 
     def counts(self):
         return {"chunks": len(self.chunks), "provenance": len(self.prov)}

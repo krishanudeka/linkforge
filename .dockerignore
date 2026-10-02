@@ -1,7 +1,6 @@
 .env
 venv
 frontend/node_modules
-storage_data/chroma_db
 storage_data/pdfs
 __pycache__
 .git

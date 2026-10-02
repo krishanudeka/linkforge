@@ -75,8 +75,8 @@ class VectorClient:
             return 0
         texts = [t["provenance_snippet"].strip() for t in rows]
         vecs = self.embedder.embed_documents(texts)
-        ids = [_sid(paper_id, "prov", t["subject"], t["relation"], t["object"], t["provenance_snippet"][:48])
-               for t in rows]
+        ids = [_sid(paper_id, "prov", str(i), t["subject"], t["relation"], t["object"], t["provenance_snippet"][:48])
+               for i, t in enumerate(rows)]
         metas = [
             _sanitize({
                 "paper_id": paper_id,
@@ -129,20 +129,33 @@ class VectorClient:
         )
         return self._flatten(res)
 
-    def get_edge_provenance(self, a: str, b: str, limit: int = 5) -> List[Dict[str, Any]]:
-        """Supporting sentences for the relation between entities a and b (either direction)."""
+    def get_edge_provenance(self, a: str, b: str, limit: int = 5,
+                            relation: Optional[str] = None,
+                            paper_ids: Optional[List[str]] = None) -> List[Dict[str, Any]]:
+        """Supporting sentences for the relation between entities a and b (either direction).
+
+        Optionally narrowed to one relation type and/or a set of papers, so evidence can be tied to
+        the exact graph edge (subject, relation, object, paper) rather than just the entity pair.
+        """
         if self.provenance.count() == 0:
             return []
-        where = {"$or": [
+        pair = {"$or": [
             {"$and": [{"subject": a}, {"object": b}]},
             {"$and": [{"subject": b}, {"object": a}]},
         ]}
-        res = self.provenance.get(where=where, limit=limit)
+        conds: List[Dict[str, Any]] = [pair]
+        if relation:
+            conds.append({"relation": relation})
+        if paper_ids:  # an empty $in is invalid in Chroma, so only filter when there is something to match
+            conds.append({"paper_id": {"$in": list(paper_ids)}})
+        where = {"$and": conds} if len(conds) > 1 else pair
+        # Chroma applies `limit` before we can sort by confidence, so over-fetch, sort, then slice.
+        res = self.provenance.get(where=where, limit=max(limit * 10, 50))
         out = []
         for i, _id in enumerate(res.get("ids", [])):
             out.append({"id": _id, "text": res["documents"][i], "metadata": res["metadatas"][i] or {}})
         out.sort(key=lambda r: -float(r["metadata"].get("confidence", 0)))
-        return out
+        return out[:limit]
 
     def counts(self) -> Dict[str, int]:
         return {"chunks": self.chunks.count(), "provenance": self.provenance.count()}
