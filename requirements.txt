@@ -1,0 +1,25 @@
+# ---- API -------------------------------------------------------------
+fastapi>=0.110
+uvicorn[standard]>=0.27
+pydantic>=2.6
+pydantic-settings>=2.2
+python-multipart>=0.0.9
+
+# ---- Databases -------------------------------------------------------
+neo4j>=5.18,<7
+chromadb>=0.5,<2
+
+# ---- NLP / embeddings / LLM -----------------------------------------
+sentence-transformers>=2.5
+groq>=0.9
+rapidfuzz>=3.5
+
+# ---- Data pipeline ---------------------------------------------------
+PyMuPDF>=1.24
+requests>=2.31
+apscheduler>=3.10,<4
+
+# ---- Numerics / graph algorithms ------------------------------------
+numpy>=1.26
+scipy>=1.11
+networkx>=3.2

@@ -1,0 +1,6 @@
+# Extra deps for GNN link prediction (training + inference).
+# torch itself is already pulled in by sentence-transformers.
+# On Colab/Kaggle:  pip install -r requirements-gnn.txt sentence-transformers neo4j
+torch>=2.1
+torch-geometric>=2.5
+scikit-learn>=1.3
