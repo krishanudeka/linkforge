@@ -11,16 +11,16 @@ Instead of simply returning relevant papers, LinkForge helps researchers explore
 
 ---
 
-## 🚀 Live Demo
+## Live Demo
 
-- 🌐 **Frontend:** [Open LinkForge](https://linkforge-silk.vercel.app)
-- ⚙️ **Backend API:** [LinkForge API](https://linkforge-api-yil7.onrender.com)
-- 📚 **API Documentation:** [Swagger / OpenAPI Docs](https://linkforge-api-yil7.onrender.com/docs)
-- 💻 **Source Code:** [GitHub Repository](https://github.com/krishanudeka/linkforge)
+- **Frontend:** [Open LinkForge](https://linkforge-silk.vercel.app)
+- **Backend API:** [LinkForge API](https://linkforge-api-yil7.onrender.com)
+- **API Documentation:** [Swagger / OpenAPI Docs](https://linkforge-api-yil7.onrender.com/docs)
+- **Source Code:** [GitHub Repository](https://github.com/krishanudeka/linkforge)
 
 ---
 
-## 🧠 How LinkForge Works
+## How LinkForge Works
 
 ```text
                        Scientific Papers
@@ -70,7 +70,7 @@ Instead of simply returning relevant papers, LinkForge helps researchers explore
 
 ---
 
-## ✨ Key Features
+## Key Features
 
 ### Scientific Literature Acquisition
 
@@ -120,7 +120,7 @@ Entity resolution combines:
 
 ---
 
-## 🕸️ Knowledge Graph — Neo4j
+## Knowledge Graph — Neo4j
 
 Neo4j stores the structured scientific knowledge extracted from papers.
 
@@ -153,7 +153,7 @@ Every relationship originates from an LLM-extracted and validated subject–rela
 
 ---
 
-## 🔎 Graph Retrieval & Reasoning
+## Graph Retrieval & Reasoning
 
 ### Personalized PageRank
 
@@ -195,7 +195,7 @@ The graph uses confidence/support-derived edge costs and performs confidence-wei
 
 ---
 
-## 🧮 Link Prediction
+## Link Prediction
 
 LinkForge distinguishes between **observed scientific relationships** and **predicted relationships**.
 
@@ -238,7 +238,7 @@ The currently deployed system uses **Adamic–Adar when a trained GNN checkpoint
 
 ---
 
-## 🧠 Graph-RAG
+## Graph-RAG
 
 LinkForge combines graph retrieval with semantic retrieval.
 
@@ -274,7 +274,7 @@ The goal is to avoid answers based solely on the LLM's internal knowledge.
 
 ---
 
-## 📚 ChromaDB
+## ChromaDB
 
 Neo4j answers: **what is connected to what?**
 ChromaDB answers: **what does the source text actually say?**
@@ -293,7 +293,7 @@ ChromaDB  = semantic text/evidence retrieval
 
 ---
 
-## 💬 Chatbot
+## Chatbot
 
 Example question:
 
@@ -305,7 +305,7 @@ LinkForge retrieves graph facts, relevant graph paths, paper excerpts and eviden
 
 ---
 
-## 🎨 Frontend
+## Frontend
 
 Built with React, Vite, Tailwind CSS, react-force-graph-3d and Three.js.
 
@@ -332,7 +332,7 @@ Dashed edges  → predicted / unverified
 
 ---
 
-## ⚙️ Backend
+## Backend
 
 Built with **FastAPI**. Main endpoints:
 
@@ -359,7 +359,7 @@ Neo4j · ChromaDB · Groq · Embedding Model · Graph Algorithms · Link Predict
 
 ---
 
-## 🛠️ Local Setup
+## Local Setup
 
 ### Requirements
 
@@ -480,7 +480,7 @@ Frontend: http://localhost:5173 (the Vite dev server proxies `/api` to the FastA
 
 ---
 
-## 📥 Ingesting Real Papers
+## Ingesting Real Papers
 
 ### Command line
 
@@ -521,7 +521,7 @@ When a usable open-access PDF is unavailable, LinkForge falls back to the paper 
 
 ---
 
-## 🧪 Testing
+## Testing
 
 ```bash
 python -m pytest -q
@@ -533,7 +533,7 @@ The suite covers API behaviour, pipeline logic, Graph-RAG behaviour, graph algor
 
 ---
 
-## 🐳 Docker
+## Docker
 
 Build and run the backend:
 
@@ -550,7 +550,7 @@ docker compose up -d
 
 ---
 
-## ☁️ Deployment
+## Deployment
 
 ### Frontend — Vercel
 
@@ -588,7 +588,7 @@ The deployed system uses **Neo4j Aura** to host the persistent knowledge graph (
 
 ---
 
-## 🔐 Security
+## Security
 
 - Never commit `.env`
 - Never expose Neo4j credentials or Groq API keys
@@ -601,7 +601,7 @@ The deployed system uses **Neo4j Aura** to host the persistent knowledge graph (
 
 ---
 
-## 📁 Project Structure
+## Project Structure
 
 ```text
 linkforge/
@@ -681,7 +681,7 @@ linkforge/
 
 ---
 
-## 🔬 Example End-to-End Flow
+## Example End-to-End Flow
 
 For a search such as `curcumin`:
 
@@ -707,36 +707,8 @@ For a chatbot question, the system combines Neo4j graph facts, graph paths, Chro
 
 ---
 
-## 📌 Current Implementation Status
 
-| Component | Status |
-|---|---|
-| Europe PMC acquisition | ✅ Implemented |
-| PDF parsing | ✅ Implemented |
-| Text cleaning | ✅ Implemented |
-| Sentence-aware chunking | ✅ Implemented |
-| Groq LLM extraction | ✅ Implemented |
-| Entity resolution | ✅ Implemented |
-| Relation normalization | ✅ Implemented |
-| Neo4j knowledge graph | ✅ Implemented |
-| ChromaDB vector store | ✅ Implemented |
-| Personalized PageRank | ✅ Implemented |
-| Confidence-weighted path search | ✅ Implemented |
-| Bridge Search | ✅ Implemented |
-| Graph-RAG chatbot | ✅ Implemented |
-| FastAPI backend | ✅ Implemented |
-| React 3D frontend | ✅ Implemented |
-| Adamic–Adar link prediction | ✅ Active fallback |
-| GraphSAGE implementation | ✅ Available |
-| GraphSAGE training/evaluation | 🔄 Optional / future work |
-| Vercel deployment | ✅ Deployed |
-| Render deployment | ✅ Deployed |
-| Neo4j Aura deployment | ✅ Deployed |
-| Automated tests | ✅ 28/28 passing |
-
----
-
-## 🚀 Future Work
+## Future Work
 
 - Train and formally evaluate GraphSAGE/GAT link prediction
 - Expand the scientific corpus
@@ -750,7 +722,7 @@ For a chatbot question, the system combines Neo4j graph facts, graph paths, Chro
 
 ---
 
-## 📜 Project Summary
+## Project Summary
 
 LinkForge combines scientific literature, LLM information extraction, entity resolution, knowledge graphs, vector search, graph algorithms, link prediction, Graph-RAG and interactive 3D visualization to transform large collections of papers into a **queryable, evidence-grounded knowledge discovery system**.
 
