@@ -670,7 +670,7 @@ linkforge/
 
 ---
 
-## 📊 Example Queries
+## Example Queries
 
 | Type | Example |
 |---|---|
